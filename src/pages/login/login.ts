@@ -10,7 +10,7 @@ import { AngularFireAuth } from "angularfire2/auth";
   templateUrl: 'login.html',
 })
 export class LoginPage {
-
+  //create user object as User
   user = {} as User;
 
   constructor(private alertCtrl: AlertController, private afAuth:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
@@ -22,14 +22,16 @@ export class LoginPage {
 
   async login(user: User){
     try{
+      //try to authenticate using firebase
     const result = await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
     console.log(result);
     if (result) {
+      //if login is successful, set the rootpage to CreateProfilePage
       this.navCtrl.setRoot('ProfilePage');
     }
     }
     catch (e){
-      // console.error(e);
+      // create and present an alert if there is an error
       let alert = this.alertCtrl.create({
         title: 'Alert!',
         message: 'Invalid Email or Password, please try again!',
@@ -37,6 +39,7 @@ export class LoginPage {
             text: 'Ok',
             handler: () => {
               console.log('Ok clicked');
+              //set the rootpage bcak to LoginPage after clicking OK
               this.navCtrl.setRoot('LoginPage');
             }
           }]
@@ -46,6 +49,7 @@ export class LoginPage {
   }
 
   register(){
+    //push the RegisterPage to the stack
     this.navCtrl.push('RegisterPage');
   }
 

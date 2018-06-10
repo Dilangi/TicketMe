@@ -1,15 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { User } from '../../models/user';
 import { AngularFireAuth } from "angularfire2/auth";
 
 
-/**
- * Generated class for the RegisterPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -20,7 +14,7 @@ export class RegisterPage {
 
   user = {} as User;
 
-  constructor(private afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private alertCtrl: AlertController, private afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
   }
 
 
@@ -34,6 +28,19 @@ export class RegisterPage {
       
     } catch (error) {
       console.error(error);
+      let alert = this.alertCtrl.create({
+        title: 'Alert!',
+        message: error.message,
+        buttons: [{
+            text: 'Ok',
+            handler: () => {
+              console.log('Ok clicked');
+              //set the rootpage bcak to LoginPage after clicking OK
+              this.navCtrl.setRoot('LoginPage');
+            }
+          }]
+      });
+      alert.present();
     }
   }
 
