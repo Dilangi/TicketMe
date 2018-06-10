@@ -41,4 +41,8 @@ export class HomePage {
     });
   }
 
+  goToMyTicketsPage(): void{
+    this.navCtrl.push('MyTicketsPage');
+  }
+
 }

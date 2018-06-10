@@ -7,14 +7,63 @@
 <ion-header>
 
   <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Home</ion-title>
   </ion-navbar>
 
 </ion-header>
 
+<ion-menu [content]="content">
+    <ion-header>
+      <ion-toolbar>
+          <ion-avatar item-start>
+            <img src="ud.jpg" width="150px" style="display:inline-block" height="150px"/>
+          </ion-avatar>
+        <ion-title>Username</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <button ion-item (click)="goToMyTicketsPage()">
+            <ion-icon name="cart" md-cart></ion-icon> My Tickets
+        </button>
+        <button ion-item (click)="goToEditProfilePgae()">
+            <ion-icon ios="ios-person" md="md-person"></ion-icon> Edit Profile
+        </button>
+        <button ion-item (click)="goToRatingPage()">
+            <ion-icon ios="ios-star" md="md-star"></ion-icon> Rating
+        </button>
+        <button ion-item (click)="goToHelpPgae()">
+            <ion-icon ios="ios-help-circle" md="md-help-circle"></ion-icon> Help
+        </button>
+        <button ion-item (click)="logout()">
+            <ion-icon ios="ios-log-out" md="md-log-out"></ion-icon> Logout
+        </button>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  
+  <ion-nav id="nav" #content [root]="rootPage"></ion-nav>
+  
+
 
 <ion-content padding>
-  <p>Name: {{profileData}}</p>
+
+  <!-- <p>Name: {{profileData}}</p> -->
   <!-- <p>Username: {{(profileData | async)?. username}}</p>
   <p>Season Number: {{(profileData | async)?. Season}}</p> -->
+
+
+  <ion-buttons>
+    <br>
+    <br>
+    <button ion-button block color="secondary">Buy Tickets</button>
+    <br>
+    <button ion-button block color="secondary">Buy Season</button>
+    <br>
+    <button ion-button block color="secondary">Train Schedule</button>
+  </ion-buttons>
+
 </ion-content>
