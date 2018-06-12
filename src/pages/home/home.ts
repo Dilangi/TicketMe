@@ -45,4 +45,13 @@ export class HomePage {
     this.navCtrl.push('MyTicketsPage');
   }
 
+  goToEditProfilePgae(){
+    this.navCtrl.push('EditprofilePage');
+  }
+
+  logout(){
+    this.navCtrl.setRoot('LoginPage');
+    window.location.reload();
+  }
+
 }

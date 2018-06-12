@@ -11,16 +11,20 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Home</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="logout()">Logout</button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 <ion-menu [content]="content">
     <ion-header>
+      <ion-item>
+        <!-- <ion-img style="width: 80px; height: 80px;" src="../assets/imgs/ud.jpg" alt="image"></ion-img> -->
+      </ion-item>
       <ion-toolbar>
-          <ion-avatar item-start>
-            <img src="ud.jpg" width="150px" style="display:inline-block" height="150px"/>
-          </ion-avatar>
         <ion-title>Username</ion-title>
       </ion-toolbar>
     </ion-header>
