@@ -1,0 +1,29 @@
+<ion-content padding class="pass">
+  <ion-menu  type="overlay" [content]="mycontent">
+  <ion-content>
+    <ion-list>
+      <p>some menu content, could be list items</p>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #mycontent [root]="rootPage"></ion-nav>
+
+  <ion-buttons start>
+    <div class=container id="menuToggle">
+      <button ion-button ion-only menuToggle>
+        <ion-icon name="menu">  Menu</ion-icon> 
+      </button>
+    </div>  
+  </ion-buttons>
+
+<div class=container id="btn1">
+  <button  ion-button (click)="buyPassengerTicket()" item-left>Buy Ticket</button>
+  <button ion-button (click)="buyPassengerSeason()" item-left>Buy Season</button>
+  <button ion-button (click)="showTrainSchedule()" item-left>Train Schedule</button>
+</div>
+
+
+  <!--button block ion-buttton (click)="backTo()" item-left>Back</button-->
+
+</ion-content>

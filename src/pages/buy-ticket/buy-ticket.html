@@ -1,0 +1,96 @@
+<!--
+  Generated template for the BuyTicketPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+  <ion-header>
+
+    <ion-navbar>
+      <!--ion-content padding class="pass">
+  <ion-menu  type="overlay" [content]="mycontent">
+  <ion-content>
+    <ion-list>
+      <p>some menu content, could be list items</p>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #mycontent [root]="rootPage"></ion-nav>
+
+  <ion-buttons start>
+    <div class=container id="menuToggle">
+      <button ion-button ion-only menuToggle>
+        <ion-icon name="menu">  Menu</ion-icon> 
+      </button>
+    </div>  
+  </ion-buttons-->
+      <ion-title>buyTicket</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+      <ion-list>
+      
+        <ion-item>
+          <ion-label floating>From:</ion-label>
+          <ion-input type="text" #startStation></ion-input>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label floating>To:</ion-label>
+          <ion-input type="text" #endStation></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Number of passengers:</ion-label>
+            <ion-input type="number" #passengerCount></ion-input>
+          </ion-item>
+
+        <ion-item>
+          <ion-label floating>Class:</ion-label>
+          <ion-select [(ngModel)]="class">
+              <ion-option value="nes">First</ion-option>
+              <ion-option value="n64">Second</ion-option>
+              <ion-option value="ps">Thrid</ion-option>
+            </ion-select>
+                
+              
+          <!--ion-input[type=number]::-webkit-inner-spin-button, 
+          ion-input[type=number]::-webkit-outer-spin-button {{ 
+              -webkit-appearance: none;
+              -moz-appearance: none;
+              appearance: none;
+              margin: 0; 
+          }}-->
+          
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Total payment:</ion-label>
+          <ion-input type="number" #payment></ion-input>
+          //get the calculated value into this
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Date:</ion-label>
+          <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>
+          //get current date
+        </ion-item>
+
+        <!--ion-item>
+          //this is for the season forms
+            <ion-label>Date</ion-label>
+            <ion-datetime displayFormat="MM/YYYY" pickerFormat="MMMM YYYY" [(ngModel)]="myDate"></ion-datetime>
+          </ion-item-->
+      
+      </ion-list>
+      
+      <div padding class=container id="btn1">
+        <button block ion-button (click)="buyNow()">Buy Ticket</button>
+      </div>
+      </ion-content>
