@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
 //this is from ticket-option page
 import { BarcodeScanner} from '@ionic-native/barcode-scanner';
 //end copy
+
 
 /**
  * Generated class for the MyTicketsPage page.
@@ -17,16 +19,19 @@ import { BarcodeScanner} from '@ionic-native/barcode-scanner';
   templateUrl: 'my-tickets.html',
 })
 export class MyTicketsPage {
+
   qrData = null;
 	createdCode = null;
 	scannedCode = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner) {
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyTicketsPage');
   }
+
 
   createCode(){
   	this.createdCode = this.qrData;
@@ -50,5 +55,6 @@ export class MyTicketsPage {
   goBack(){
 
   }
+
 
 }

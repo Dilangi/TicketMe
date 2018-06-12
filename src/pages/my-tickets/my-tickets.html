@@ -6,14 +6,17 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>myTickets</ion-title>
+
+  <ion-navbar color="primary">
+    <ion-title>My Tickets</ion-title>
+
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
   <ion-card *ngIf="createdCode">
       <ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>
       <ion-card-content><p>Value: {{ createdCode }}</p></ion-card-content>
@@ -37,3 +40,4 @@
       </ion-card-content>
     </ion-card-->
   </ion-content>
+

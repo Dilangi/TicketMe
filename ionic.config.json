@@ -1,5 +1,7 @@
 {
-  "name": "TicketMeV1",
+
+  "name": "ticketme",
+
   "app_id": "",
   "type": "ionic-angular",
   "integrations": {

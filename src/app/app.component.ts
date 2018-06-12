@@ -1,35 +1,26 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+
+import { Component } from '@angular/core';
+import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
-import { HomePage } from '../pages/home/home';
-
-import { MyTicketsPage} from '../pages/my-tickets/my-tickets';
-import { EditProfilePage} from '../pages/edit-profile/edit-profile';
-import { RatingPage} from '../pages/rating/rating';
-import { HelpPage} from '../pages/help/help';
-import { LogOutPage} from '../pages/log-out/log-out';
 
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
 
-  rootPage:any = HomePage;
-  activePage: any;
+  rootPage:any = 'LoginPage';
 
-  pages: Array<{icon:string, title: string, component:any}>;
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen){
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
     });
+
 
     //used for ngFor and navigation
     this.pages = [
@@ -55,3 +46,4 @@ export class MyApp {
     }
     
   }
+
