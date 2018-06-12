@@ -1,9 +1,3 @@
-<!--
-  Generated template for the HomePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar color="primary">
@@ -12,9 +6,6 @@
     </button>
     <ion-title>Home</ion-title>
 
-    <ion-buttons end>
-      <button ion-button icon-only (click)="logout()">Logout</button>
-    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -25,7 +16,7 @@
         <!-- <ion-img style="width: 80px; height: 80px;" src="../assets/imgs/ud.jpg" alt="image"></ion-img> -->
       </ion-item>
       <ion-toolbar>
-        <ion-title>Username</ion-title>
+        <ion-title><b>{{ username }}</b></ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
@@ -54,11 +45,6 @@
 
 
 <ion-content padding>
-
-  <!-- <p>Name: {{profileData}}</p> -->
-  <!-- <p>Username: {{(profileData | async)?. username}}</p>
-  <p>Season Number: {{(profileData | async)?. Season}}</p> -->
-
 
   <ion-buttons>
     <br>

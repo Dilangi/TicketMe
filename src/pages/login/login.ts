@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { User } from '../../models/user';
 import { AngularFireAuth } from "angularfire2/auth";
+import { AngularFireDatabase } from 'angularfire2/database';
 
 
 @IonicPage()
@@ -13,7 +14,7 @@ export class LoginPage {
   //create user object as User
   user = {} as User;
 
-  constructor(private alertCtrl: AlertController, private afAuth:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private toast: ToastController, private afDatabase: AngularFireDatabase, private alertCtrl: AlertController, private afAuth:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -26,8 +27,8 @@ export class LoginPage {
     const result = await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
     console.log(result);
     if (result) {
-      //if login is successful, set the rootpage to CreateProfilePage
-      this.navCtrl.setRoot('ProfilePage');
+      //if login is successful, check whether there is a profile for the email
+      this.checkProfile();
     }
     }
     catch (e){
@@ -51,6 +52,27 @@ export class LoginPage {
   register(){
     //push the RegisterPage to the stack
     this.navCtrl.push('RegisterPage');
+  }
+
+  ionViewWillLeave(){
+    this.checkProfile();
+  }
+
+  checkProfile(){
+    this.afAuth.authState.subscribe(data=>{
+      if(data && data.email && data.uid){
+        this.afDatabase.app.database().ref(`profile/`+data.uid).on('value',(snapshot)=>{
+          if(snapshot.val()){
+            this.navCtrl.setRoot('HomePage');
+            console.log(snapshot.val());
+            console.log(this);
+          }
+        });
+      }
+      else{
+        this.navCtrl.setRoot('ProfilePage');
+      }
+    });
   }
 
 }

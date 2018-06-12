@@ -3,8 +3,6 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Profile } from '../../models/profile';
-import { FirebaseObjectObservable } from 'angularfire2/database-deprecated';
-import { Observable } from 'rxjs';
 
 @IonicPage()
 @Component({
@@ -15,11 +13,19 @@ export class HomePage {
 
   profileData: AngularFireList<Profile>;
   email: any;
+  public username;
+  public name;
 
   constructor(private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, private toast: ToastController, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
+    this.getUserData();
+    console.log(this.username);
+  }
+
+  getUserData() {
+    let scope = this;
     this.afAuth.authState.subscribe(data=> {
       if (data && data.email && data.uid) {
         this.toast.create({
@@ -27,10 +33,12 @@ export class HomePage {
           duration: 3000
         }).present();
 
-        this.profileData = this.afDatabase.list(`profile/${data.uid}`)
-        this.email = Object("ahbaj");
-        // app.database().ref(`profile/$(data.uid)`);
-        // object(`profile/${data.uid}`)
+        // this.profileData = this.afDatabase.list(`profile/${data.uid}`);
+        this.afDatabase.app.database().ref(`profile/`+data.uid).on('value', function(snapshot){
+          let user = snapshot.val();
+          console.log(this,user.username);
+          scope.username = user.username;
+        });
       }
       else{
         this.toast.create({
