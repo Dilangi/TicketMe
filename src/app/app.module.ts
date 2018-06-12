@@ -3,9 +3,12 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+
 import { AngularFireModule } from "angularfire2";
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { NgxQRCodeModule} from 'ngx-qrcode2';
+import { BarcodeScanner} from '@ionic-native/barcode-scanner';
 
 import { MyApp } from './app.component';
 
@@ -21,22 +24,28 @@ const config = {
 @NgModule({
   declarations: [
     MyApp
+
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+
     AngularFireModule.initializeApp(config),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    NgxQRCodeModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp
+
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+
+    {provide: ErrorHandler, useClass: IonicErrorHandler}, BarcodeScanner
+
   ]
 })
 export class AppModule {}

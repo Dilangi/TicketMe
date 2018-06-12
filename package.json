@@ -1,5 +1,7 @@
 {
+
   "name": "ticketme",
+
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
@@ -21,6 +23,7 @@
     "@angular/http": "5.2.9",
     "@angular/platform-browser": "5.2.9",
     "@angular/platform-browser-dynamic": "5.2.9",
+
     "@ionic-native/core": "4.6.0",
     "@ionic-native/splash-screen": "4.6.0",
     "@ionic-native/status-bar": "4.6.0",
@@ -38,11 +41,13 @@
     "rxjs": "5.5.8",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.26"
+
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.8",
     "typescript": "~2.6.2"
   },
+
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
@@ -56,4 +61,5 @@
       "android"
     ]
   }
+
 }
