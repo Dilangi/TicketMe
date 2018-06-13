@@ -24,6 +24,11 @@
       <ion-input [(ngModel)]="profile.season" type="number"></ion-input>
   </ion-item>
 
+  <ion-item>
+      <ion-label floating>Mobile Number</ion-label>
+      <ion-input [(ngModel)]="profile.mobile" type="tel"></ion-input>
+  </ion-item>
+
   <button ion-button clear black (click)="createProfile()">Create Profile</button>
 
 </ion-content>

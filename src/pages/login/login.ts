@@ -28,7 +28,7 @@ export class LoginPage {
     console.log(result);
     if (result) {
       //if login is successful, check whether there is a profile for the email
-      this.checkProfile();
+      this.navCtrl.setRoot('ProfilePage');
     }
     }
     catch (e){
@@ -55,24 +55,24 @@ export class LoginPage {
   }
 
   ionViewWillLeave(){
-    this.checkProfile();
+    // this.checkProfile();
   }
 
-  checkProfile(){
-    this.afAuth.authState.subscribe(data=>{
-      if(data && data.email && data.uid){
-        this.afDatabase.app.database().ref(`profile/`+data.uid).on('value',(snapshot)=>{
-          if(snapshot.val()){
-            this.navCtrl.setRoot('HomePage');
-            console.log(snapshot.val());
-            console.log(this);
-          }
-        });
-      }
-      else{
-        this.navCtrl.setRoot('ProfilePage');
-      }
-    });
-  }
+  // checkProfile(){
+  //   this.afAuth.authState.subscribe(data=>{
+  //     if(data && data.email && data.uid){
+  //       this.afDatabase.app.database().ref(`profile/`+data.uid).on('value',(snapshot)=>{
+  //         if(snapshot.val()){
+  //           this.navCtrl.setRoot('HomePage');
+  //           console.log(snapshot.val());
+  //           console.log(this);
+  //         }
+  //       });
+  //     }
+  //     else{
+  //       this.navCtrl.setRoot('ProfilePage');
+  //     }
+  //   });
+  // }
 
 }
