@@ -13,12 +13,15 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class LoginPage {
   //create user object as User
   user = {} as User;
+  gotEmail: string;
 
   constructor(private toast: ToastController, private afDatabase: AngularFireDatabase, private alertCtrl: AlertController, private afAuth:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
+    this.gotEmail = navParams.get('data');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+    console.log(this.gotEmail);
   }
 
   async login(user: User){

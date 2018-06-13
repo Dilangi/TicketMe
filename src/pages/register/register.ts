@@ -13,6 +13,7 @@ import { AngularFireAuth } from "angularfire2/auth";
 export class RegisterPage {
 
   user = {} as User;
+  password: any;
 
   constructor(private alertCtrl: AlertController, private afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -20,10 +21,26 @@ export class RegisterPage {
 
   async register(user: User){
     try {
-      const result = await this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
-      console.log(result);
-      if (result) {
-        this.navCtrl.setRoot('LoginPage');  
+      if(this.user.password == this.password){
+        const result = await this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
+        console.log(result);
+          if (result) {
+            this.navCtrl.setRoot('LoginPage',{data: this.user.email});  
+          }
+      }
+      else {
+        this.alertCtrl.create({
+          title: 'Alert!',
+          message: "Passwords do not match!",
+          buttons: [{
+              text: 'Ok',
+              handler: () => {
+                console.log('Ok clicked');
+                //set the rootpage bcak to LoginPage after clicking OK
+                this.navCtrl.setRoot('RegisterPage');
+              }
+            }]
+        }).present();
       }
       
     } catch (error) {
@@ -36,12 +53,15 @@ export class RegisterPage {
             handler: () => {
               console.log('Ok clicked');
               //set the rootpage bcak to LoginPage after clicking OK
-              this.navCtrl.setRoot('LoginPage');
+              this.navCtrl.setRoot('RegisterPage');
             }
           }]
       });
       alert.present();
     }
+    console.log(this.password);
+    console.log(this.user.password);
+    }
   }
 
-}
+
