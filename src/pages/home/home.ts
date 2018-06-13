@@ -57,9 +57,20 @@ export class HomePage {
     this.navCtrl.push('EditprofilePage');
   }
 
+  goToRatingPage(){
+    this.navCtrl.push('RatingPage');
+  }
+
+  goToHelpPgae(){
+    this.navCtrl.push('HelpPage');
+  }
+
+  goToSchedulePage(){
+    this.navCtrl.push('SchedulePage');
+  }
+
   logout(){
-    this.navCtrl.setRoot('LoginPage');
-    window.location.reload();
+    this.navCtrl.setRoot('LandingPage');
   }
 
 }

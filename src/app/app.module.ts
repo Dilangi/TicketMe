@@ -8,6 +8,10 @@ import { AngularFireAuthModule } from "angularfire2/auth";
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { MyApp } from './app.component';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { HTTP } from '@ionic-native/http';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 const config = {
   apiKey: "AIzaSyDASEFzIjRaQtwjr3tAMgaXh6A-qF4Bxh4",
@@ -27,7 +31,8 @@ const config = {
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(config),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    NgxQRCodeModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -36,7 +41,9 @@ const config = {
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    HTTP,
+    InAppBrowser
   ]
 })
 export class AppModule {}
