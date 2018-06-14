@@ -1,3 +1,16 @@
 page-my-tickets {
+    .icon{
+        padding-right: 10px;
+        align-items: left;
+    }
+    
+    ion-content{
+        background: #ffecec;
+    }
 
+    .qrimage{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }

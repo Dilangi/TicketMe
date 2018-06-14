@@ -1,7 +1,7 @@
 
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Buy Ticket</ion-title>
   </ion-navbar>
 
@@ -9,5 +9,44 @@
 
 
 <ion-content padding>
+  
+  <ion-item>
+    <ion-label>From: </ion-label>
+    <ion-select [(ngModel)]="from">
+      <ion-option>Female</ion-option>
+      <ion-option>Male</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>To: </ion-label>
+    <ion-select [(ngModel)]="to">
+      <ion-option>Female</ion-option>
+      <ion-option>Male</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Number of passengers: </ion-label>
+    <ion-select [(ngModel)]="number">
+      <ion-option>Female</ion-option>
+      <ion-option>Male</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Class: </ion-label>
+    <ion-select [(ngModel)]="number">
+      <ion-option>Female</ion-option>
+      <ion-option>Male</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Date: </ion-label>
+    <ion-datetime [(ngModel)]= "date"  min= "{{dateYear}}-{{datemonth3}}-{{dateDay2}}" ></ion-datetime>
+  </ion-item>
+
+
 
 </ion-content>

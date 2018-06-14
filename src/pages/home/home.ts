@@ -65,6 +65,10 @@ export class HomePage {
     this.navCtrl.push('HelpPage');
   }
 
+  goToBuyTicketPage(){
+    this.navCtrl.push('BuyTicketsPage');
+  }
+
   goToSchedulePage(){
     this.navCtrl.push('SchedulePage');
   }
