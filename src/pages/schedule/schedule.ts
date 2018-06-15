@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Ticket } from '../../models/ticket';
+import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 
 
 @IonicPage()
@@ -20,17 +21,46 @@ export class SchedulePage {
   public dateDay2 = ("0" + this.dateDay).slice(-2);
   public dateComplete = this.dateYear+"-"+this.datemonth3+"-"+this.dateDay2;
 
-  
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private alertCtrl: AlertController, private iab: InAppBrowser, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SchedulePage');
   }
 
-  async testClick(){
+  getShedule(){
+
+    if(this.ticket.from == null || this.ticket.to == null){
+      this.alertCtrl.create({
+        message: 'Please select stations to get the schedule.',
+        buttons: [{
+          text: 'Ok'
+        }]
+      }).present();
+    }
+    else{
+
+      if(this.ticket.from == this.ticket.to){
+        this.alertCtrl.create({
+          message: 'Two stations can not be the same.',
+          buttons: [{
+            text: 'Ok'
+          }]
+        }).present();
+      }
+
+      else{
+        const options: InAppBrowserOptions = {
+          zoom: 'no'
+        }
+    
+        const browser = this.iab.create("http://slr.malindaprasad.com/?from="+this.ticket.from+"&to="+this.ticket.to+"&date="+this.dateComplete+"&singlebutton=", '_self', options);
+      }
+      
+    }
+
+    
   }
 
 

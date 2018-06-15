@@ -10,7 +10,7 @@
 <ion-content padding>
   <ion-item>
       <ion-label>From: </ion-label>
-      <ion-select style="min-width: 70%; text-align: right;" interface="popover" [(ngModel)]="ticket.from">
+      <ion-select required style="min-width: 70%; text-align: right;" interface="popover" [(ngModel)]="ticket.from">
           <ion-option value='ADAGALA'>ADAGALA</ion-option>
           <ion-option value='ANM'>AHANGAMA</ion-option>
           <ion-option value='AUH'>AHUNGALLE</ion-option>
@@ -367,7 +367,7 @@
 
   <ion-item>
     <ion-label>To: </ion-label>
-    <ion-select interface="popover" style="min-width: 70%; text-align: right;" [(ngModel)]="ticket.to">
+    <ion-select required interface="popover" style="min-width: 70%; text-align: right;" [(ngModel)]="ticket.to">
         <ion-option value='ADAGALA'>ADAGALA</ion-option>
         <ion-option value='ANM'>AHANGAMA</ion-option>
         <ion-option value='AUH'>AHUNGALLE</ion-option>
@@ -722,8 +722,6 @@
     </ion-select>
   </ion-item>
 
-  <button ion-button block (click)="testClick()">Test</button>
-
-  <!-- <iframe class= 'webPage' name= "samplePage" src="http://slr.malindaprasad.com/?from={{ticket.from}}&to={{ticket.to}}&date={{dateComplete}}&singlebutton="></iframe> -->
+  <button ion-button block color="secondary" (click)="getShedule()">Get Schedule</button>
 </ion-content>
   
