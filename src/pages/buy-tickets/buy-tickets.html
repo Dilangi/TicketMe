@@ -12,7 +12,7 @@
   
   <ion-item>
     <ion-label>From: </ion-label>
-    <ion-select [(ngModel)]="from">
+    <ion-select style="min-width: 70%; text-align: right;" interface="popover" [(ngModel)]="ticket.from">
         <ion-option value='ADAGALA'>ADAGALA</ion-option>
         <ion-option value='ANM'>AHANGAMA</ion-option>
         <ion-option value='AUH'>AHUNGALLE</ion-option>
@@ -369,7 +369,7 @@
 
   <ion-item>
     <ion-label>To: </ion-label>
-    <ion-select [(ngModel)]="to">
+    <ion-select interface="popover" style="min-width: 70%; text-align: right;" [(ngModel)]="ticket.to">
         <ion-option value='ADAGALA'>ADAGALA</ion-option>
         <ion-option value='ANM'>AHANGAMA</ion-option>
         <ion-option value='AUH'>AHUNGALLE</ion-option>
@@ -726,7 +726,7 @@
 
   <ion-item>
     <ion-label>Number of passengers: </ion-label>
-    <ion-select [(ngModel)]="number">
+    <ion-select interface="popover" [(ngModel)]="ticket.number">
         <ion-option>1</ion-option>
         <ion-option>2</ion-option>
         <ion-option>3</ion-option>
@@ -773,7 +773,7 @@
 
   <ion-item>
     <ion-label>Class: </ion-label>
-    <ion-select [(ngModel)]="class">
+    <ion-select interface="popover" [(ngModel)]="ticket.class">
       <ion-option>1st Class</ion-option>
       <ion-option>2nd Class</ion-option>
       <ion-option>3rd Class</ion-option>
@@ -782,8 +782,16 @@
 
   <ion-item>
     <ion-label>Date: </ion-label>
-    <ion-datetime [(ngModel)]= "date"  min= "{{dateYear}}-{{datemonth3}}-{{dateDay2}}" ></ion-datetime>
+    <ion-datetime [(ngModel)]= "ticket.date"  min= "{{dateYear}}-{{datemonth3}}-{{dateDay2}}" ></ion-datetime>
   </ion-item>
+
+  <ion-item>
+    <ion-label>Total Payment: </ion-label>
+  </ion-item>
+
+  <ion-buttons>
+    <button ion-button block color="secondary" (click)="buyTicket()">Buy</button>
+  </ion-buttons>
 
 
 

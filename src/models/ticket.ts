@@ -4,4 +4,5 @@ export interface Ticket{
     number: number;
     class: string;
     price: number;
+    date: string;
 }
