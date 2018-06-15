@@ -18,6 +18,7 @@ export class BuyTicketsPage {
   public datemonth3 = ("0" + this.dateMonth2).slice(-2);
   public dateDay= new Date().getDate().toString();
   public dateDay2 = ("0" + this.dateDay).slice(-2);
+  public dateComplete = this.dateYear+"-"+this.datemonth3+"-"+this.dateDay2;
 
   ticket = {} as Ticket;
 
@@ -26,7 +27,7 @@ export class BuyTicketsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BuyTicketsPage');
-    console.log(this.dateYear+"-"+this.datemonth3+"-"+this.dateDay2);
+    console.log(this.dateComplete);
     this.ticket.date = new Date().toISOString();
   }
 

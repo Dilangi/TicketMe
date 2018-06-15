@@ -15,6 +15,9 @@ export class LoginPage {
   user = {} as User;
   gotEmail: string;
 
+  public type = 'password';
+  public showPass = false;
+
   constructor(private toast: ToastController, private afDatabase: AngularFireDatabase, private alertCtrl: AlertController, private afAuth:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
     this.gotEmail = navParams.get('data');
   }
@@ -49,6 +52,16 @@ export class LoginPage {
           }]
       });
       alert.present();
+    }
+  }
+
+  showPassword() {
+    this.showPass = !this.showPass;
+ 
+    if(this.showPass){
+      this.type = 'text';
+    } else {
+      this.type = 'password';
     }
   }
 

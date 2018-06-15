@@ -16,8 +16,11 @@
   </ion-item>
 
   <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+    <ion-label floating>Password</ion-label>
+    <ion-input type="{{type}}" [(ngModel)]="user.password"></ion-input>
+
+    <button *ngIf="!showPass" ion-button clear color="dark" type="button" item-right (click)="showPassword()"> <ion-icon md="md-eye-off"></ion-icon></button>
+    <button *ngIf="showPass" ion-button clear color="dark" type="button" item-right (click)="showPassword()"> <ion-icon md="md-eye"></ion-icon></button>
   </ion-item>
 
   <button ion-button block color="secondary" (click)="login(user)">Login</button>
