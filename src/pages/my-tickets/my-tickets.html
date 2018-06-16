@@ -8,19 +8,16 @@
 
 
 <ion-content padding>
-
-  <div class="qrimage">
-  <ion-img class="qrimage" style="width: 300px; height: 300px;" src="assets/imgs/ud.jpg" alt="image"></ion-img>
-  </div>
-  
-  <ion-buttons>
-      <br>
-      <br>
-      <button ion-button block color="secondary"><ion-icon ios="ios-download" md="md-download" class="icon"></ion-icon> Download</button>
-      <br>
-      <button ion-button block color="secondary"><ion-icon ios="ios-eye" md="md-eye" class="icon"></ion-icon> View QR Code</button>
-      <br>
-      <button ion-button block color="secondary"><ion-icon ios="ios-paper" md="md-paper" class="icon"></ion-icon> Ticket Details</button>
-    </ion-buttons>
-
+  <ion-card *ngFor="let result of results">
+    <ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>
+    <ion-card-content>
+      <ion-card-title>
+        Nine Inch Nails Live
+        </ion-card-title>
+      <p>
+        The most popular industrial group ever, and largely
+        responsible for bringing the music to a mass audience.
+      </p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

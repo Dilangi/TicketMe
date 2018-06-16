@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Profile } from '../../models/profile';
@@ -20,7 +20,7 @@ export class EditprofilePage {
   public mobile;
   mySub: any;
 
-  constructor(private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private alertCtrl: AlertController, private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -35,20 +35,36 @@ export class EditprofilePage {
   }
 
   getUserData() {
-    this.afAuth.authState.subscribe(data=> {
-      if (data && data.email && data.uid) {
-        this.afDatabase.app.database().ref(`profile/`+data.uid).on('value', (snapshot)=>{
-          let user = snapshot.val();
-          console.log(user.name, user.username);
-          this.username = user.username;
-          this.name = user.name;
-          this.mobile = user.mobile;
-        });
-      }
-    });
+    let scope = this;
+
+    var user = this.afAuth.auth.currentUser;
+
+    if(user){
+      this.afDatabase.app.database().ref(`profile/`+user.uid).on('value', (snapshot)=>{
+        let user = snapshot.val();
+        console.log(user.name, user.username);
+        scope.username = user.username;
+        scope.name = user.name;
+        scope.mobile = user.mobile;
+      });
+    }
+    else{
+      this.alertCtrl.create({
+        message: 'No user found!, please login',
+        buttons: [{
+          text: 'Ok',
+            handler: () => {
+              console.log('Ok clicked');
+            }
+        }]
+      }).present();
+    }
   }
 
   updateProfile(){
+
+    // this.afDatabase.database.ref('profile/'+user.uid)
+
     // this.afAuth.authState.take(1).subscribe(auth => {
     //   this.afDatabase.object(`profile/${auth.uid}`).update(this.profile)
     // });

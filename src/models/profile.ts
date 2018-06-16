@@ -3,5 +3,6 @@ export interface Profile{
     username: string;
     season: string;
     mobile: number;
+    qr: string;
 
 }

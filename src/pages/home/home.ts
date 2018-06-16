@@ -25,27 +25,20 @@ export class HomePage {
 
   getUserData() {
     let scope = this;
-    this.afAuth.authState.subscribe(data=> {
-      if (data && data.email && data.uid) {
-        this.toast.create({
-          message: `Signed in as, ${data.email}`,
-          duration: 3000
-        }).present();
 
-        // this.profileData = this.afDatabase.list(`profile/${data.uid}`);
-        this.afDatabase.app.database().ref(`profile/`+data.uid).on('value', function(snapshot){
-          let user = snapshot.val();
-          console.log(this,user.username);
-          scope.username = user.username;
-        });
-      }
-      else{
-        this.toast.create({
-          message: 'could not find details',
-          duration: 3000
-        }).present();
-      }
-    });
+    var user = this.afAuth.auth.currentUser;
+    if(user){
+      this.toast.create({
+        message: `Signed in as, ${user.email}`,
+        duration: 3000
+      }).present();
+
+      this.afDatabase.app.database().ref(`profile/`+user.uid).on('value', function(snapshot){
+        let user = snapshot.val();
+        console.log(this,user.username);
+        scope.username = user.username;
+      });
+    }
   }
 
   goToMyTicketsPage(): void{
@@ -72,7 +65,12 @@ export class HomePage {
     this.navCtrl.push('SchedulePage');
   }
 
+  testPage(){
+    this.navCtrl.push('TestPage');
+  }
+
   logout(){
+    this.afAuth.auth.signOut();
     this.navCtrl.setRoot('LandingPage');
   }
 

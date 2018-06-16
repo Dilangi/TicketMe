@@ -31,8 +31,7 @@ const config = {
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(config),
     AngularFireAuthModule,
-    AngularFireDatabaseModule,
-    NgxQRCodeModule
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,7 +42,8 @@ const config = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HTTP,
-    InAppBrowser
+    InAppBrowser,
+    BarcodeScanner
   ]
 })
 export class AppModule {}
