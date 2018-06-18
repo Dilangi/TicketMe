@@ -63,18 +63,19 @@ export class EditprofilePage {
 
   updateProfile(){
 
-    // this.afDatabase.database.ref('profile/'+user.uid)
-
-    // this.afAuth.authState.take(1).subscribe(auth => {
-    //   this.afDatabase.object(`profile/${auth.uid}`).update(this.profile)
-    // });
-    // this.alertCtrl.create({
-    //   title: 'Successfull',
-    //   message: 'Profile Updated Successfully!',
-    //   buttons: [{
-    //     text: 'OK'
-    //   }]
-    // }).present();
+    this.afAuth.authState.take(1).subscribe(auth => {
+      this.afDatabase.object(`profile/${auth.uid}`).update({
+        name: this.name,
+        username: this.username,
+        mobile: this.mobile})
+    });
+    this.alertCtrl.create({
+      title: 'Successfull',
+      message: 'Profile Updated Successfully!',
+      buttons: [{
+        text: 'OK'
+      }]
+    }).present();
   }
 
 }
