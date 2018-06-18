@@ -15,14 +15,13 @@ export class MyTicketsPage {
 
   createdCode = null;
   results: any;
-
+  array2 = [];
 
   constructor(private alertCtrl: AlertController, private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
     
   }
 
   ionViewDidLoad() {
-    this.results = this.getResults();
 
     console.log('ionViewDidLoad MyTicketsPage');
 
@@ -30,8 +29,15 @@ export class MyTicketsPage {
 
     if(user){
       this.afDatabase.app.database().ref(`ticket/${user.uid}`).on('value', (snapshot)=>{
-        let user = snapshot.val();
-        console.log(user);
+        var obj = snapshot.val();
+        var array = Object.keys(obj).map(function(key) {
+          return [obj[key]];
+        });
+        this.results = array;
+        for (let i = 0; i < array.length; i++) {
+          this.array2.push(array[i][0]);
+        }
+        console.log(this.array2);
       });
     }
     else{
@@ -48,15 +54,9 @@ export class MyTicketsPage {
   }
 
   getResults() {
-    var user = this.afAuth.auth.currentUser;
+  }
 
-    if(user){
-      this.afDatabase.app.database().ref(`ticket/${user.uid}`).on('value', (snapshot)=>{
-        let user = snapshot.val();
-        console.log(user);
-        return user.uid;
-      });
-    }
+  testClick(){
   }
 
 }

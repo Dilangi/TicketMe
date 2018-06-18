@@ -13,10 +13,6 @@ import { Qr } from '../../models/qr';
 })
 export class TestPage {
 
-  qr = {} as Qr
-
-  createdCode = null;
-
   constructor(private barcodeScanner: BarcodeScanner, private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
   }
 
@@ -24,11 +20,7 @@ export class TestPage {
     console.log('ionViewDidLoad TestPage');
   }
 
-  testButton(){
-    this.createdCode = this.getUser();
-    
-    var user = this.afAuth.auth.currentUser;
-    this.afDatabase.object(`qr/${user.uid}`).set(this.qr)   
+  testButton(){ 
   }
 
   getUser(){

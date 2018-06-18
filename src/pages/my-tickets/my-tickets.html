@@ -8,16 +8,23 @@
 
 
 <ion-content padding>
-  <ion-card *ngFor="let result of results">
-    <ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>
+
+  <ion-card *ngFor="let i of array2">
+    <ngx-qrcode [qrc-value]="i.from+i.to+i.number+i.class+i.date+i.passenger"></ngx-qrcode>
     <ion-card-content>
       <ion-card-title>
-        Nine Inch Nails Live
+        From {{ i.from }} to {{i.to}}
         </ion-card-title>
       <p>
-        The most popular industrial group ever, and largely
-        responsible for bringing the music to a mass audience.
+        From: {{i.from}}<br/>
+        To: {{i.to}}<br/>
+        Passengers: {{i.number}}<br/>
+        Class: {{i.class}}<br/>
+        Date: {{i.date}}<br/>
+        User: {{i.passenger}}<br/>
+
       </p>
     </ion-card-content>
   </ion-card>
+
 </ion-content>

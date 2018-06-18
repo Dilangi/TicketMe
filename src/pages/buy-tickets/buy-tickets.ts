@@ -41,12 +41,13 @@ export class BuyTicketsPage {
   }
 
   buyTicket(){
-    this.createdCode = this.ticket.from + " " +this.ticket.to + " " + this.ticket.number + " " + this.ticket.class + " " + this.ticket.date + " " + this.ticket.passenger;
 
     let newUUID = UUID.UUID();
     var user = this.afAuth.auth.currentUser;
     this.ticket.passenger = user.email;
     this.afDatabase.object(`ticket/${user.uid}/${newUUID}`).set(this.ticket)
+    
+    this.createdCode = this.ticket.from + " " +this.ticket.to + " " + this.ticket.number + " " + this.ticket.class + " " + this.ticket.date + " " + this.ticket.passenger;
 
     this.alertCtrl.create({
       message: 'Purchase successful! Check My Tickets.',
@@ -60,6 +61,7 @@ export class BuyTicketsPage {
     console.log(this.ticket.number);
     console.log(this.ticket.class);
     console.log(this.ticket.date);
+    console.log(this.ticket.passenger);
   }
 
 }
