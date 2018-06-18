@@ -1,0 +1,20 @@
+page-home {
+    ion-content{
+        background: #ffecec;
+    }
+
+    .image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .image-profile{
+        width: 50%;
+        height: 50%;
+    }
+
+    .ion-item-image{
+        background-color: #5a1818;
+    }
+}

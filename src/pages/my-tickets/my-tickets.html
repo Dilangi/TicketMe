@@ -1,0 +1,27 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>My Tickets</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card *ngFor="let i of array2">
+    <ngx-qrcode [qrc-value]=""></ngx-qrcode>
+    <ion-card-content>
+      <ion-card-title>
+        Nine Inch Nails Live 
+        </ion-card-title>
+      <p>
+        {{array2}}
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+
+  <button ion-button (click)="testClick()">test</button>
+  <ion-label>{{array2}}</ion-label>
+</ion-content>
