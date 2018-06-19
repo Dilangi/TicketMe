@@ -6,6 +6,7 @@ import { Qr } from '../../models/qr';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from 'angularfire2/database';
 import { UUID } from 'angular2-uuid';
+import * as moment from "moment";
 
 
 @IonicPage()
@@ -43,8 +44,14 @@ export class BuyTicketsPage {
   buyTicket(){
 
     let newUUID = UUID.UUID();
+    this.ticket.uid = newUUID;
     var user = this.afAuth.auth.currentUser;
     this.ticket.passenger = user.email;
+
+    const date = new Date()
+    const formatedDate = date.toISOString().substring(0, 10);
+    this.ticket.date = formatedDate;
+
     this.afDatabase.object(`ticket/${user.uid}/${newUUID}`).set(this.ticket)
     
     this.createdCode = this.ticket.from + " " +this.ticket.to + " " + this.ticket.number + " " + this.ticket.class + " " + this.ticket.date + " " + this.ticket.passenger;
@@ -55,13 +62,11 @@ export class BuyTicketsPage {
         text: 'OK'
       }]
     }).present();
-    
-    console.log(this.ticket.from);
-    console.log(this.ticket.to);
-    console.log(this.ticket.number);
-    console.log(this.ticket.class);
-    console.log(this.ticket.date);
-    console.log(this.ticket.passenger);
+
+    this.ticket.from = "";
+    this.ticket.to = "";
+    this.ticket.number = null;
+    this.ticket.class = null;
   }
 
 }

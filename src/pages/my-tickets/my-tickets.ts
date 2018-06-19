@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { Qr } from '../../models/qr';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from 'angularfire2/database';
+import { Ticket } from '../../models/ticket';
 
 
 
@@ -16,6 +17,7 @@ export class MyTicketsPage {
   createdCode = null;
   results: any;
   array2 = [];
+  ticket = {} as Ticket;
 
   constructor(private alertCtrl: AlertController, private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
     
@@ -24,20 +26,33 @@ export class MyTicketsPage {
   ionViewDidLoad() {
 
     console.log('ionViewDidLoad MyTicketsPage');
+    this.getTickets();
+  }
+
+  getTickets(){   
 
     var user = this.afAuth.auth.currentUser;
 
     if(user){
-      this.afDatabase.app.database().ref(`ticket/${user.uid}`).on('value', (snapshot)=>{
+      this.afDatabase.app.database().ref(`ticket/${user.uid}`).once('value', (snapshot)=>{
         var obj = snapshot.val();
-        var array = Object.keys(obj).map(function(key) {
-          return [obj[key]];
-        });
-        this.results = array;
-        for (let i = 0; i < array.length; i++) {
-          this.array2.push(array[i][0]);
+        if(obj == null){
+          this.alertCtrl.create({
+            message: "You don't have any tickets!",
+            buttons: [{
+              text: "Ok"
+            }]
+          }).present();
+        }else{
+          var array = Object.keys(obj).map(function(key) {
+            return [obj[key]];
+          });
+          this.results = array;
+          for (let i = 0; i < array.length; i++) {
+            this.array2.push(array[i][0]);
+          }
+          console.log(this.array2);
         }
-        console.log(this.array2);
       });
     }
     else{
@@ -53,10 +68,27 @@ export class MyTicketsPage {
     }
   }
 
-  getResults() {
-  }
+  deleteTicket(i){
 
-  testClick(){
+    this.alertCtrl.create({
+      message: "Are you sure you want to delete this ticket? You want be refunded.",
+      buttons: [{
+        text: "ok",
+        handler: () => {
+          var user = this.afAuth.auth.currentUser;
+          if(user){
+            this.afDatabase.app.database().ref(`ticket/${user.uid}/${i.uid}`).remove();
+            this.getTickets();
+            this.navCtrl.pop();
+            this.navCtrl.push('MyTicketsPage');
+      
+          // location.reload();
+          }
+        }
+      }]
+    }).present();
+
+    
   }
 
 }

@@ -13,6 +13,8 @@ import { Qr } from '../../models/qr';
 })
 export class TestPage {
 
+  date: any = new Date().toString;
+
   constructor(private barcodeScanner: BarcodeScanner, private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
   }
 
@@ -20,7 +22,8 @@ export class TestPage {
     console.log('ionViewDidLoad TestPage');
   }
 
-  testButton(){ 
+  testButton(){
+    console.log(this.date); 
   }
 
   getUser(){

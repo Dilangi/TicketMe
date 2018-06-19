@@ -25,6 +25,22 @@
 
       </p>
     </ion-card-content>
+
+    <ion-row no-padding>
+      <ion-col text-center>
+        <button ion-button clear small color="green" icon-start>
+          <ion-icon name='musical-notes'></ion-icon>
+          Share
+        </button>
+      </ion-col>
+      <ion-col text-right style="margin-right: 30px">
+        <button ion-button clear small color="danger" icon-start (click)="deleteTicket(i)">
+          <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+          Delete
+        </button>
+      </ion-col>
+    </ion-row>
+
   </ion-card>
 
 </ion-content>
