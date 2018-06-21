@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, App } from 'ionic-angular';
 import { Qr } from '../../models/qr';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -19,7 +19,7 @@ export class MyTicketsPage {
   array2 = [];
   ticket = {} as Ticket;
 
-  constructor(private alertCtrl: AlertController, private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private app: App, private alertCtrl: AlertController, private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
     
   }
 
@@ -78,17 +78,18 @@ export class MyTicketsPage {
           var user = this.afAuth.auth.currentUser;
           if(user){
             this.afDatabase.app.database().ref(`ticket/${user.uid}/${i.uid}`).remove();
-            this.getTickets();
-            this.navCtrl.pop();
-            this.navCtrl.push('MyTicketsPage');
-      
-          // location.reload();
+            this.navCtrl.popToRoot();
+            this.app.getRootNav().setRoot('TabsPage');
           }
         }
       }]
     }).present();
 
     
+  }
+
+  backHome(){
+    this.app.getRootNav().setRoot('HomePage');
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Profile } from '../../models/profile';
@@ -20,7 +20,7 @@ export class EditprofilePage {
   public mobile;
   mySub: any;
 
-  constructor(private alertCtrl: AlertController, private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private toast: ToastController, private alertCtrl: AlertController, private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -76,6 +76,19 @@ export class EditprofilePage {
         text: 'OK'
       }]
     }).present();
+  }
+
+  async resetPassword(){
+    var user = this.afAuth.auth.currentUser;
+    await this.afAuth.auth.sendPasswordResetEmail(user.email)
+    .then((reset)=>{   
+        this.alertCtrl.create({  
+          message: "Password reset email has been sent to your mail",
+          buttons: [{
+            text: "Ok"
+          }]
+        }).present();
+      })
   }
 
 }

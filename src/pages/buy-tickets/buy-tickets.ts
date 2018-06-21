@@ -43,30 +43,42 @@ export class BuyTicketsPage {
 
   buyTicket(){
 
-    let newUUID = UUID.UUID();
-    this.ticket.uid = newUUID;
-    var user = this.afAuth.auth.currentUser;
-    this.ticket.passenger = user.email;
+    if(this.ticket.from == null || this.ticket.to == null || this.ticket.number == null || this.ticket.class == null){
 
-    const date = new Date()
-    const formatedDate = date.toISOString().substring(0, 10);
-    this.ticket.date = formatedDate;
+      this.alertCtrl.create({
+        message: "Input all the details to buy a ticket",
+        buttons: [{
+          text: "Ok"
+        }]
+      }).present();
+    }
+    else{
 
-    this.afDatabase.object(`ticket/${user.uid}/${newUUID}`).set(this.ticket)
-    
-    this.createdCode = this.ticket.from + " " +this.ticket.to + " " + this.ticket.number + " " + this.ticket.class + " " + this.ticket.date + " " + this.ticket.passenger;
-
-    this.alertCtrl.create({
-      message: 'Purchase successful! Check My Tickets.',
-      buttons: [{
-        text: 'OK'
-      }]
-    }).present();
-
-    this.ticket.from = "";
-    this.ticket.to = "";
-    this.ticket.number = null;
-    this.ticket.class = null;
+      let newUUID = UUID.UUID();
+      this.ticket.uid = newUUID;
+      var user = this.afAuth.auth.currentUser;
+      this.ticket.passenger = user.email;
+  
+      const date = new Date()
+      const formatedDate = date.toISOString().substring(0, 10);
+      this.ticket.date = formatedDate;
+  
+      this.afDatabase.object(`ticket/${user.uid}/${newUUID}`).set(this.ticket)
+      
+      this.createdCode = this.ticket.from + " " +this.ticket.to + " " + this.ticket.number + " " + this.ticket.class + " " + this.ticket.date + " " + this.ticket.passenger;
+  
+      this.alertCtrl.create({
+        message: 'Purchase successful! Check My Tickets.',
+        buttons: [{
+          text: 'OK'
+        }]
+      }).present();
+  
+      this.ticket.from = "";
+      this.ticket.to = "";
+      this.ticket.number = null;
+      this.ticket.class = null;
+    }
   }
 
 }
