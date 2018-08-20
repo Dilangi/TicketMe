@@ -12,6 +12,7 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { HTTP } from '@ionic-native/http';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Stripe } from '@ionic-native/stripe';
 
 const config = {
   apiKey: "AIzaSyDASEFzIjRaQtwjr3tAMgaXh6A-qF4Bxh4",
@@ -43,7 +44,8 @@ const config = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HTTP,
     InAppBrowser,
-    BarcodeScanner
+    BarcodeScanner,
+    Stripe
   ]
 })
 export class AppModule {}

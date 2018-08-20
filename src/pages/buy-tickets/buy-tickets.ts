@@ -6,7 +6,6 @@ import { Qr } from '../../models/qr';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from 'angularfire2/database';
 import { UUID } from 'angular2-uuid';
-import * as moment from "moment";
 
 
 @IonicPage()

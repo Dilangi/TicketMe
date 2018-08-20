@@ -61,6 +61,10 @@ export class HomePage {
     this.navCtrl.push('BuyTicketsPage');
   }
 
+  goToBuySeasonPage(){
+    this,this.navCtrl.push('BuySeasonPage');
+  }
+
   goToSchedulePage(){
     this.navCtrl.push('SchedulePage');
   }
