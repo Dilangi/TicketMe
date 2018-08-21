@@ -13,6 +13,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { HTTP } from '@ionic-native/http';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Stripe } from '@ionic-native/stripe';
+import { DatePipe } from '@angular/common'
 
 const config = {
   apiKey: "AIzaSyDASEFzIjRaQtwjr3tAMgaXh6A-qF4Bxh4",
@@ -45,7 +46,8 @@ const config = {
     HTTP,
     InAppBrowser,
     BarcodeScanner,
-    Stripe
+    Stripe,
+    DatePipe
   ]
 })
 export class AppModule {}

@@ -7,4 +7,5 @@ export interface Season{
     price: number;
     expire: string;
     passenger: string;
+    paymentmethod: string;
 }

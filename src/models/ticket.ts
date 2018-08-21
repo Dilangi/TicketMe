@@ -7,4 +7,5 @@ export interface Ticket{
     price: number;
     date: string;
     passenger: string;
+    paymentmethod: string;
 }

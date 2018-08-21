@@ -17,7 +17,7 @@ export class MyTicketsPage {
   createdCode = null;
   results: any;
   array2 = [];
-  ticket = {} as Ticket;
+  ticket = {} as Ticket; 
 
   constructor(private app: App, private alertCtrl: AlertController, private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
     

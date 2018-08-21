@@ -42,10 +42,18 @@ export class BuyTicketsPage {
 
   buyTicket(){
 
-    if(this.ticket.from == null || this.ticket.to == null || this.ticket.number == null || this.ticket.class == null){
+    if(this.ticket.from == null || this.ticket.to == null || this.ticket.number == null || this.ticket.class == null || !this.ticket.paymentmethod){
 
       this.alertCtrl.create({
         message: "Input all the details to buy a ticket",
+        buttons: [{
+          text: "Ok"
+        }]
+      }).present();
+    }
+    if(this.ticket.from == this.ticket.to){
+      this.alertCtrl.create({
+        message: "Starting station and end station cannot be the same!",
         buttons: [{
           text: "Ok"
         }]
@@ -64,7 +72,7 @@ export class BuyTicketsPage {
   
       this.afDatabase.object(`ticket/${user.uid}/${newUUID}`).set(this.ticket)
       
-      this.createdCode = this.ticket.from + " " +this.ticket.to + " " + this.ticket.number + " " + this.ticket.class + " " + this.ticket.date + " " + this.ticket.passenger;
+      this.createdCode = this.ticket.from + " " +this.ticket.to + " " + this.ticket.number + " " + this.ticket.class + " " + this.ticket.date + " " + this.ticket.passenger + " " + this.ticket.paymentmethod;
   
       this.alertCtrl.create({
         message: 'Purchase successful! Check My Tickets.',
