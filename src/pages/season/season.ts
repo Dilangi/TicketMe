@@ -39,7 +39,7 @@ export class SeasonPage {
         var obj = snapshot.val();
         if(obj == null){
           this.alertCtrl.create({
-            message: "You don't have any tickets!",
+            message: "You don't have any seasons!",
             buttons: [{
               text: "Ok"
             }]
@@ -73,7 +73,7 @@ export class SeasonPage {
   deleteTicket(i){
 
     this.alertCtrl.create({
-      message: "Are you sure you want to delete this ticket? You want be refunded.",
+      message: "Are you sure you want to delete this season? You want be refunded.",
       buttons: [{
         text: "ok",
         handler: () => {

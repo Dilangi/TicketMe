@@ -15,20 +15,21 @@
 <ion-content padding>
 
   <ion-card *ngFor="let i of array2">
-    <ngx-qrcode [qrc-value]="i.from+i.to+i.number+i.class+i.date+i.passenger"></ngx-qrcode>
-    <ion-card-content>
-      <ion-card-title>
-        From {{ i.from }} to {{i.to}}
+    <ngx-qrcode [qrc-value]="i.uid + i.userUid"></ngx-qrcode>
+    <ion-card-content style="padding-top: 0%;">
+      <ion-card-title style="margin-top: 0%; padding-top: 0%;">
+          <p *ngIf="i.expired == true" style="color: red; font-weight: bold; font-size: larger;">Expired</p>
+          <p *ngIf="i.expired == false" style="color: green; font-weight: bold; font-size: x-large;">Valid</p>
         </ion-card-title>
       <p>
-        From: {{i.from}}<br/>
-        To: {{i.to}}<br/>
+        From: <b>{{i.from}}</b> <br/>
+        To: <b>{{i.to}}</b> <br/>
         Passengers: {{i.number}}<br/>
         Class: {{i.class}}<br/>
         Date: {{i.date}}<br/>
-        User: {{i.passenger}}<br/>
-
+        User: {{i.passenger}}
       </p>
+
     </ion-card-content>
 
     <ion-row no-padding>

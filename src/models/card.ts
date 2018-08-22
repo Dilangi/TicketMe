@@ -1,5 +1,6 @@
 export interface Card{
     number: number;
-    date: string;
-    cvv: number;
+    datemonth: number;
+    dateyear: number;
+    ccv: number;
 }

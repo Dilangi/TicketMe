@@ -84,6 +84,7 @@ export class BuySeasonPage {
       this.season.passenger = user.email;
   
       this.season.expire = this.latest_date;
+      this.season.expired = false;
   
       this.afDatabase.object(`season/${user.uid}/${newUUID}`).set(this.season)
       

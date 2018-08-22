@@ -34,7 +34,7 @@ export class LoginPage {
     console.log(result);
     if (result) {
       //if login is successful, check whether there is a profile for the email
-      this.navCtrl.setRoot('ProfilePage');
+      this.navCtrl.setRoot('HomePage');
     }
     }
     catch (e){

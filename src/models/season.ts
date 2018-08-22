@@ -8,4 +8,5 @@ export interface Season{
     expire: string;
     passenger: string;
     paymentmethod: string;
+    expired: boolean;
 }

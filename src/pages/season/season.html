@@ -13,18 +13,19 @@
 
 <ion-content padding>
   <ion-card *ngFor="let i of array2">
-    <ngx-qrcode [qrc-value]="i.from+i.to+i.seasonno+i.class+i.expire+i.passenger"></ngx-qrcode>
-    <ion-card-content>
-      <ion-card-title>
-        From {{ i.from }} to {{i.to}}
-        </ion-card-title>
+    <ngx-qrcode [qrc-value]="i.uid"></ngx-qrcode>
+    <ion-card-content style="padding-top: 0%;">
+      <ion-card-title style="margin-top: 0%; padding-top: 0%;">
+        <p *ngIf="i.expired == true" style="color: red; font-weight: bold; font-size: larger;">Expired</p>
+        <p *ngIf="i.expired == false" style="color: green; font-weight: bold; font-size: x-large;">Valid</p>
+        <!-- From {{ i.from }} to {{i.to}} -->
+      </ion-card-title>
       <p>
-        From: {{i.from}}<br/>
-        To: {{i.to}}<br/>
+        From: <b>{{i.from}}</b> <br/>
+        To: <b>{{i.to}}</b> <br/>
         Class: {{i.class}}<br/>
         Expire Date: {{i.expire}}<br/>
         User: {{i.passenger}}<br/>
-
       </p>
     </ion-card-content>
 

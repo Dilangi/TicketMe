@@ -1,5 +1,6 @@
+import { Price } from './../../models/price';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, App, AlertController } from 'ionic-angular';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Profile } from '../../models/profile';
@@ -15,8 +16,11 @@ export class HomePage {
   email: any;
   public username;
   public name;
+  results: any;
+  array2: any[] = [];
+  price = {} as Price;
 
-  constructor(private app: App, private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, private toast: ToastController, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private alertCtrl: AlertController, private app: App, private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, private toast: ToastController, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -75,21 +79,10 @@ export class HomePage {
   }
 
   async testPage(){
-    var user = this.afAuth.auth.currentUser;
-    const reset = await this.afAuth.auth.sendPasswordResetEmail(user.email)
-    .then((reset)=>{
-      if(reset){
-        this.navCtrl.push('TestPage');     
-        this.toast.create({  
-          'message':"Password reset email has been sent to your mail",          
-          duration:5000,   
-        }).present();
-      }else{
-        console.log('Error while sending Reset link email'); 
-      } 
-      },function(error){
-         console.log("Error Message:",error);
-       });
+    this.navCtrl.push('CardDetailsPage');
+  }
+
+  testPage2(){
   }
 
 }

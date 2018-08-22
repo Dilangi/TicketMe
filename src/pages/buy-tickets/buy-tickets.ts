@@ -31,6 +31,8 @@ export class BuyTicketsPage {
 
   ticket = {} as Ticket;
 
+  payment: any;
+
   constructor(private alertCtrl: AlertController, private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, private barcodeScanner: BarcodeScanner, public navCtrl: NavController, public navParams: NavParams) {
   }
 
@@ -51,24 +53,18 @@ export class BuyTicketsPage {
         }]
       }).present();
     }
-    if(this.ticket.from == this.ticket.to){
-      this.alertCtrl.create({
-        message: "Starting station and end station cannot be the same!",
-        buttons: [{
-          text: "Ok"
-        }]
-      }).present();
-    }
     else{
 
       let newUUID = UUID.UUID();
       this.ticket.uid = newUUID;
       var user = this.afAuth.auth.currentUser;
       this.ticket.passenger = user.email;
+      this.ticket.userUid = user.uid;
   
       const date = new Date()
       const formatedDate = date.toISOString().substring(0, 10);
       this.ticket.date = formatedDate;
+      this.ticket.expired = false;
   
       this.afDatabase.object(`ticket/${user.uid}/${newUUID}`).set(this.ticket)
       
@@ -88,4 +84,25 @@ export class BuyTicketsPage {
     }
   }
 
+  test(){
+    let scope = this;
+    console.log(this.ticket.class);
+    if(this.ticket.from == null || this.ticket.to == null || this.ticket.class == null || this.ticket.number == null){
+      this.alertCtrl.create({
+        message: "Enter all details to calculate price!",
+        buttons: [{
+          text: "Ok"
+        }]
+      }).present();
+    }
+    else{
+      
+    this.afDatabase.app.database().ref(`price/${this.ticket.to}/${this.ticket.class}`).on('value', function(snapshot){
+      let price1 = snapshot.val();
+      let qty = scope.ticket.number;
+      scope.payment = price1*qty;
+      console.log(price1*qty);
+      });
+    }
+  }
 }

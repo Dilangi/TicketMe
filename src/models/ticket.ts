@@ -1,4 +1,5 @@
 export interface Ticket{
+    userUid: string;
     uid: string;
     from: string;
     to: string;
@@ -8,4 +9,5 @@ export interface Ticket{
     date: string;
     passenger: string;
     paymentmethod: string;
+    expired: boolean;
 }

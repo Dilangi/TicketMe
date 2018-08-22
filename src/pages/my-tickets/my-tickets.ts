@@ -17,7 +17,8 @@ export class MyTicketsPage {
   createdCode = null;
   results: any;
   array2 = [];
-  ticket = {} as Ticket; 
+  ticket = {} as Ticket;
+  public useruid;
 
   constructor(private app: App, private alertCtrl: AlertController, private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
     
@@ -29,11 +30,12 @@ export class MyTicketsPage {
     this.getTickets();
   }
 
-  getTickets(){   
+  getTickets(){
 
     var user = this.afAuth.auth.currentUser;
 
     if(user){
+      this.useruid = user.uid;
       this.afDatabase.app.database().ref(`ticket/${user.uid}`).once('value', (snapshot)=>{
         var obj = snapshot.val();
         if(obj == null){

@@ -8,7 +8,31 @@
 
 
 <ion-content padding>
+  <form ((ngSubmit)="onSubmit()" >
 
-  <button ion-button (click)="testButton()">test</button>
-  <button ion-button (click)="getUser()">user</button>
+    <ion-item>
+      <ion-label>Card Number: </ion-label>
+      <ion-input type="number" [(ngModel)]="card.number" name="card_number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Expire Month: </ion-label>
+      <ion-input type="number" [(ngModel)]="card.datemonth" name="card_month"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Expire Year: </ion-label>
+      <ion-input type="number" [(ngModel)]="card.dateyear" name="card_year"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>CCV: </ion-label>
+      <ion-input type="number" [(ngModel)]="card.ccv" name="card_ccv"></ion-input>
+    </ion-item>
+
+    <button ion-button type="submit" block>Test Pay</button>
+
+  </form>
+
+
 </ion-content>

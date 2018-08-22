@@ -1,3 +1,4 @@
+import { Card } from './../../models/card';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireAuth } from "angularfire2/auth";
@@ -12,6 +13,8 @@ import { Qr } from '../../models/qr';
   templateUrl: 'test.html',
 })
 export class TestPage {
+
+  public card = {} as Card;
 
   date: any = new Date().toString;
 
