@@ -1,7 +1,7 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Credit Card Details</ion-title>
+  <ion-navbar color = "primary">
+    <ion-title>Credit/Debit Card Details</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -12,27 +12,22 @@
   <ion-list no-lines>
 
     <ion-item>
-      <ion-label stacked>Phone Number</ion-label>
-      <ion-input type="tel" [(ngModel)]="phoneNumber" [textMask]="{mask: masks.phoneNumber}"></ion-input>
-    </ion-item>
-
-    <ion-item>
       <ion-label stacked>Card</ion-label>
-      <ion-input type="tel" [(ngModel)]="cardNumber" [textMask]="{mask: masks.cardNumber}"></ion-input>
+      <ion-input type="tel" [(ngModel)]="cardnumber" [brmasker]="{mask:'0000-0000-0000-0000', len:19}" placeholder="XXXX-XXXX-XXXX-XXXX"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Expiry</ion-label>
-      <ion-input type="tel" [(ngModel)]="cardExpiry" [textMask]="{mask: masks.cardExpiry}"></ion-input>
+      <ion-input type="tel" [(ngModel)]="expiredate" [brmasker]="{mask:'00/00', len:5}" placeholder="MM/YY"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>CVV</ion-label>
-      <ion-input type="tel" [(ngModel)]="cvv"></ion-input>
+      <ion-input type="tel" [(ngModel)]="ccv" [brmasker]="{mask: '000', len:3}" placeholder="123"></ion-input>
     </ion-item>
 
   </ion-list>
 
-  <button ion-button outline (click)="save()">Save</button>
+  <button ion-button block (click)="pay()">Pay</button>
 
 </ion-content>

@@ -33,7 +33,7 @@ export class BuyTicketsPage {
 
   payment: any;
 
-  constructor(private alertCtrl: AlertController, private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, private barcodeScanner: BarcodeScanner, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private alertCtrl: AlertController, private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -44,43 +44,46 @@ export class BuyTicketsPage {
 
   buyTicket(){
 
+
     if(this.ticket.from == null || this.ticket.to == null || this.ticket.number == null || this.ticket.class == null || !this.ticket.paymentmethod){
 
       this.alertCtrl.create({
-        message: "Input all the details to buy a ticket",
+        message: "Input all the details to go to checkout!",
         buttons: [{
           text: "Ok"
         }]
       }).present();
     }
     else{
+      console.log(this.ticket);
+      this.navCtrl.push('CardDetailsPage', this.ticket);
 
-      let newUUID = UUID.UUID();
-      this.ticket.uid = newUUID;
-      var user = this.afAuth.auth.currentUser;
-      this.ticket.passenger = user.email;
-      this.ticket.userUid = user.uid;
+  //     let newUUID = UUID.UUID();
+  //     this.ticket.uid = newUUID;
+  //     var user = this.afAuth.auth.currentUser;
+  //     this.ticket.passenger = user.email;
+  //     this.ticket.userUid = user.uid;
   
-      const date = new Date()
-      const formatedDate = date.toISOString().substring(0, 10);
-      this.ticket.date = formatedDate;
-      this.ticket.expired = false;
+  //     const date = new Date()
+  //     const formatedDate = date.toISOString().substring(0, 10);
+  //     this.ticket.date = formatedDate;
+  //     this.ticket.expired = false;
   
-      this.afDatabase.object(`ticket/${user.uid}/${newUUID}`).set(this.ticket)
+  //     this.afDatabase.object(`ticket/${user.uid}/${newUUID}`).set(this.ticket)
       
-      this.createdCode = this.ticket.from + " " +this.ticket.to + " " + this.ticket.number + " " + this.ticket.class + " " + this.ticket.date + " " + this.ticket.passenger + " " + this.ticket.paymentmethod;
+  //     this.createdCode = this.ticket.from + " " +this.ticket.to + " " + this.ticket.number + " " + this.ticket.class + " " + this.ticket.date + " " + this.ticket.passenger + " " + this.ticket.paymentmethod;
   
-      this.alertCtrl.create({
-        message: 'Purchase successful! Check My Tickets.',
-        buttons: [{
-          text: 'OK'
-        }]
-      }).present();
+  //     this.alertCtrl.create({
+  //       message: 'Purchase successful! Check My Tickets.',
+  //       buttons: [{
+  //         text: 'OK'
+  //       }]
+  //     }).present();
   
-      this.ticket.from = "";
-      this.ticket.to = "";
-      this.ticket.number = null;
-      this.ticket.class = null;
+  //     this.ticket.from = "";
+  //     this.ticket.to = "";
+  //     this.ticket.number = null;
+  //     this.ticket.class = null;
     }
   }
 

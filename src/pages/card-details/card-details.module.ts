@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { CardDetailsPage } from './card-details';
-import { TextMaskModule } from 'angular2-text-mask';
+import { BrMaskerModule } from 'brmasker-ionic-3';
+
 
 @NgModule({
   declarations: [
@@ -9,7 +10,7 @@ import { TextMaskModule } from 'angular2-text-mask';
   ],
   imports: [
     IonicPageModule.forChild(CardDetailsPage),
-    TextMaskModule
+    BrMaskerModule
   ],
 })
 export class CardDetailsPageModule {}

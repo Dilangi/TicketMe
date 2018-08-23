@@ -32,6 +32,7 @@
     "angular2-text-mask": "^9.0.0",
     "angular2-uuid": "^1.1.1",
     "angularfire2": "^5.0.0-rc.6.0",
+    "brmasker-ionic-3": "^1.2.0",
     "cordova-android": "^7.0.0",
     "cordova-plugin-advanced-http": "^1.11.1",
     "cordova-plugin-device": "^2.0.1",

@@ -1,6 +1,10 @@
+import { Qr } from './../../models/qr';
+import { Ticket } from './../../models/ticket';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { TextMaskModule } from 'angular2-text-mask';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { AngularFireAuth } from "angularfire2/auth";
+import { AngularFireDatabase } from 'angularfire2/database';
+import { UUID } from 'angular2-uuid';
 
 
 @IonicPage()
@@ -10,34 +14,75 @@ import { TextMaskModule } from 'angular2-text-mask';
 })
 export class CardDetailsPage {
 
-  masks: any;
- 
-    phoneNumber: any = "";
-    cardNumber: any = "";
-    cardExpiry: any = "";
-    cvv: any = "";
+  qr = {} as Qr
 
-  constructor(private TextMaskModule: TextMaskModule, public navCtrl: NavController, public navParams: NavParams) {
-    this.masks = {
-      phoneNumber: ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
-      cardNumber: [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
-      cardExpiry: [/[0-1]/, /\d/, '/', /[1-2]/, /\d/]
-  };
+  createdCode = null;
+
+  public dateYear= new Date().getFullYear().toString();
+  public dateMonth= new Date().getMonth()+1
+  public dateMonth2= this.dateMonth.toString();
+  public datemonth3 = ("0" + this.dateMonth2).slice(-2);
+  public dateDay= new Date().getDate().toString();
+  public dateDay2 = ("0" + this.dateDay).slice(-2);
+  public dateComplete = this.dateYear+"-"+this.datemonth3+"-"+this.dateDay2;
+
+  ticket = {} as Ticket;
+
+  payment: any;
+
+  cardnumber: number;
+  expiredate: number;
+  ccv: number;
+
+  constructor(private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, private alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
   }
   
   ionViewDidLoad() {
     console.log('ionViewDidLoad CardDetailsPage');
+    this.ticket.date = new Date().toISOString();
+    this.ticket.from = this.navParams.get('from');
+    this.ticket.to = this.navParams.get('to');
+    this.ticket.number = this.navParams.get('number');
+    this.ticket.class = this.navParams.get('class');
   }
 
-  save(){
-    let unmaskedData = {
-      phoneNumber: this.phoneNumber.replace(/\D+/g, ''),
-      cardNumber: this.cardNumber.replace(/\D+/g, ''),
-      cardExpiry: this.cardExpiry.replace(/\D+/g, '')
-  };
+  pay(){
 
-  console.log(unmaskedData);
+    if(this.cardnumber == null || this.expiredate == null || this.ccv == null){
 
+      this.alertCtrl.create({
+        message: "Input all the details to buy a ticket",
+        buttons: [{
+          text: "Ok"
+        }]
+      }).present();
+    }
+    else{
+
+      let newUUID = UUID.UUID();
+      this.ticket.uid = newUUID;
+      var user = this.afAuth.auth.currentUser;
+      this.ticket.passenger = user.email;
+      this.ticket.userUid = user.uid;
+  
+      const date = new Date()
+      const formatedDate = date.toISOString().substring(0, 10);
+      this.ticket.date = formatedDate;
+      this.ticket.expired = false;
+  
+      this.afDatabase.object(`ticket/${user.uid}/${newUUID}`).set(this.ticket)
+      
+      this.createdCode = this.ticket.from + " " +this.ticket.to + " " + this.ticket.number + " " + this.ticket.class + " " + this.ticket.date + " " + this.ticket.passenger + " " + this.ticket.paymentmethod;
+  
+      this.alertCtrl.create({
+        message: 'Purchase successful! Check My Tickets.',
+        buttons: [{
+          text: 'OK'
+        }]
+      }).present();
+
+      this.navCtrl.setRoot('HomePage');
+    }
   }
 
 }

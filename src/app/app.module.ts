@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { AngularFireModule } from "angularfire2";
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { BrMaskerModule } from 'brmasker-ionic-3';
 
 import { MyApp } from './app.component';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
@@ -33,7 +34,8 @@ const config = {
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(config),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    BrMaskerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
