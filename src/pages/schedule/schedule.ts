@@ -52,7 +52,8 @@ export class SchedulePage {
 
       else{
         const options: InAppBrowserOptions = {
-          zoom: 'no'
+          zoom: 'no',
+          location: 'no'
         }
     
         const browser = this.iab.create("http://slr.malindaprasad.com/?from="+this.ticket.from+"&to="+this.ticket.to+"&date="+this.dateComplete+"&singlebutton=", '_self', options);

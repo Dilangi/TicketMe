@@ -1,7 +1,7 @@
 import { Qr } from './../../models/qr';
 import { Ticket } from './../../models/ticket';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from 'angularfire2/database';
 import { UUID } from 'angular2-uuid';
@@ -34,7 +34,7 @@ export class CardDetailsPage {
   expiredate: number;
   ccv: number;
 
-  constructor(private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, private alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private loading: LoadingController, private afDatabase: AngularFireDatabase, private afAuth:AngularFireAuth, private alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
   }
   
   ionViewDidLoad() {
@@ -44,6 +44,14 @@ export class CardDetailsPage {
     this.ticket.to = this.navParams.get('to');
     this.ticket.number = this.navParams.get('number');
     this.ticket.class = this.navParams.get('class');
+  }
+  
+  presentLoading() {
+    const loader = this.loading.create({
+      content: "Please wait...",
+      duration: 1000
+    });
+    loader.present();
   }
 
   pay(){
@@ -72,16 +80,24 @@ export class CardDetailsPage {
   
       this.afDatabase.object(`ticket/${user.uid}/${newUUID}`).set(this.ticket)
       
-      this.createdCode = this.ticket.from + " " +this.ticket.to + " " + this.ticket.number + " " + this.ticket.class + " " + this.ticket.date + " " + this.ticket.passenger + " " + this.ticket.paymentmethod;
-  
-      this.alertCtrl.create({
-        message: 'Purchase successful! Check My Tickets.',
-        buttons: [{
-          text: 'OK'
-        }]
-      }).present();
+      this.presentLoading();
 
-      this.navCtrl.setRoot('HomePage');
+      this.createdCode = this.ticket.from + " " +this.ticket.to + " " + this.ticket.number + " " + this.ticket.class + " " + this.ticket.date + " " + this.ticket.passenger + " " + this.ticket.paymentmethod;
+      
+      setTimeout(()=>{
+
+        this.alertCtrl.create({
+          message: 'Purchase successful! Check My Tickets.',
+          buttons: [{
+            text: 'OK'
+          }]
+        }).present();
+
+        this.navCtrl.setRoot('HomePage');
+
+      }, 1500);
+
+      
     }
   }
 

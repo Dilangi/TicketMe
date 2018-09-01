@@ -36,7 +36,9 @@ export class BuySeasonPage {
   }
 
   ionViewDidLoad() {
-    this.getUserData()
+    this.getUserData();
+    this.checkSeason();
+
   }
 
   getUserData() {
@@ -87,9 +89,7 @@ export class BuySeasonPage {
       this.season.expired = false;
   
       this.afDatabase.object(`season/${user.uid}/${newUUID}`).set(this.season)
-      
-      // this.createdCode = this.ticket.from + " " +this.ticket.to + " " + this.ticket.number + " " + this.ticket.class + " " + this.ticket.date + " " + this.ticket.passenger + " " + this.ticket.paymentmethod;
-  
+
       this.alertCtrl.create({
         message: 'Purchase successful! Check My Tickets.',
         buttons: [{
@@ -101,6 +101,40 @@ export class BuySeasonPage {
       this.season.to = "";
       this.season.class = null;
 
+    }
+  }
+
+  
+  checkSeason(){
+    
+    var user = this.afAuth.auth.currentUser;
+
+    if(user){
+      this.afDatabase.app.database().ref(`season/${user.uid}`).once('value', (snapshot)=>{
+        var obj = snapshot.val();
+        if(obj != null){
+          this.alertCtrl.create({
+            message: "You can't buy more than one season a month!",
+            buttons: [{
+              text: "Ok",
+              handler: () => {
+                this.navCtrl.setRoot('HomePage');
+              }
+            }]
+          }).present();
+        }
+      });
+    }
+    else{
+      this.alertCtrl.create({
+        message: 'No user found!, please login',
+        buttons: [{
+          text: 'Ok',
+            handler: () => {
+              console.log('Ok clicked');
+            }
+        }]
+      }).present();
     }
   }
 

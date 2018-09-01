@@ -23,8 +23,11 @@
     <button *ngIf="showPass" ion-button clear color="dark" type="button" item-right (click)="showPassword()"> <ion-icon md="md-eye"></ion-icon></button>
   </ion-item>
 
-  <button ion-button block color="secondary" (click)="login(user)">Login</button>
+  <button clear style="background-color: transparent; margin: 10px;" (click)="forgotPass()">Forgot Password?</button>
+
   <br/>
+
+  <button ion-button block color="secondary" (click)="login(user)" style="border-radius: 20px;">Login</button>
   <button ion-button block clear color="secondary" (click)="register()">Register</button>
 
 </ion-content>

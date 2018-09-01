@@ -34,7 +34,7 @@ export class LoginPage {
     console.log(result);
     if (result) {
       //if login is successful, check whether there is a profile for the email
-      this.navCtrl.setRoot('HomePage');
+      this.navCtrl.setRoot('ProfilePage');
     }
     }
     catch (e){
@@ -72,6 +72,28 @@ export class LoginPage {
 
   ionViewWillLeave(){
     // this.checkProfile();
+  }
+
+  forgotPass(){
+    if(this.user.email){
+      this.afAuth.auth.sendPasswordResetEmail(this.user.email)
+      .then((reset)=>{
+        this.alertCtrl.create({
+          message: "Password reset email has been sent to your mail",
+          buttons: [{
+            text: "Ok"
+          }]
+        }).present();
+      })
+    }else{      
+      this.alertCtrl.create({
+        message: "Please enter your email to send the email reset link!",
+        buttons: [{
+          text: "Ok"
+        }]
+      }).present();
+    }
+    
   }
 
   // checkProfile(){
